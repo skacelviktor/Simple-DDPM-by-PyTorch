@@ -1,7 +1,7 @@
 """
 Noise Scheduler for DDPM (Denoising Diffusion Probabilistic Models)
 
-This module implements the mathematical framework for the diffusion process:
+This code implements the mathematical framework for the diffusion process:
 - Forward process: Gradually add noise to images
 - Reverse process: Iteratively remove noise to generate new images
 
