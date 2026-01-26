@@ -62,8 +62,7 @@ x_t = \sqrt{\bar{\alpha}_t}\, x_0 + \sqrt{1 - \bar{\alpha}_t}\, \epsilon
 ```
 
 - Here, $x_0$ is the original clean image, $\epsilon \sim \mathcal{N}(0, I)$ is Gaussian noise, 
-and \(\bar{\alpha}_t = \prod_{i=1}^{t} (1 - \beta_i)\) represents the cumulative noise scaling.
-
+and $\bar{\alpha}_t = \prod_{i=1}^{t} (1 - \beta_i)$ represents the cumulative noise scaling.
 
 
 ### 2. Training: The model learns to predict the noise added at each timestep
