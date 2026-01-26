@@ -28,9 +28,6 @@ class NoiseScheduler:
     - Forward diffusion (noise addition):
         x_t = sqrt(α̅_t) * x_0 + sqrt(1 - α̅_t) * ε
 
-    - Estimation of the original sample:
-        x̂_0 = (x_t - sqrt(1 - α̅_t) * ε) / sqrt(α̅_t)
-
     - Mean of the reverse process:
         μ(x_t, t) = (1 / sqrt(α_t)) * (
             x_t - (β_t / sqrt(1 - α_{t-1})) * ε
@@ -82,15 +79,7 @@ class NoiseScheduler:
     
     def sample_prev_timestep(self, noisy_sample, noise, timestep):       
         # Get alpha values for current timestep
-        sqrt_alpha_cumprod = torch.sqrt(self.alphas_cumprod[timestep])
         sqrt_one_minus_alpha_cumprod = torch.sqrt(1.0 - self.alphas_cumprod[timestep])
-
-        # Reverse the forward process: solve for x_0 given x_t and noise
-        # This estimates what the original clean image was
-        original_samples = (noisy_sample - sqrt_one_minus_alpha_cumprod * noise) / sqrt_alpha_cumprod
-        
-        # Clamp to [-1, 1] to keep values in valid range
-        original_samples = torch.clamp(original_samples, -1.0, 1.0)
 
         # Calculate mean of the reverse process distribution
         # This is the direction we should move in denoising space
@@ -99,7 +88,7 @@ class NoiseScheduler:
 
         # At timestep 0, there's no more noise to add - return mean directly
         if timestep == 0:
-            return mean, original_samples
+            return mean
         
         # For all other timesteps, add stochasticity via variance schedule
         else:
@@ -117,4 +106,4 @@ class NoiseScheduler:
             # This adds controlled stochasticity to the denoising process
             prev_noisy_sample = mean + sigma * noise
             
-            return prev_noisy_sample, original_samples
+            return prev_noisy_sample
