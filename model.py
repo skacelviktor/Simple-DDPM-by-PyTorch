@@ -6,7 +6,6 @@ This code implements very simpified denoising network architecture used in DDPM.
 
 import torch.nn as nn
 import torch
-import numpy as np
 
 class TimeEmbedding(nn.Module):
     """

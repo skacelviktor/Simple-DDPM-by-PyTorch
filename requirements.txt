@@ -1,2 +1,14 @@
-numpy
-scikit-learn
+# Core Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Image Processing and Utilities
+Pillow>=9.0.0
+tqdm>=4.65.0
+
+# Scientific Computing (optional, for analysis and visualization)
+matplotlib>=3.5.0
+
+# Development Tools (optional)
+jupyter>=1.0.0
+ipython>=8.0.0
