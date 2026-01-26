@@ -48,11 +48,22 @@ Diffusion models work in three stages:
 
 ### 1. Forward process ($q$)
 - We gradually add noise to an image $x_0$ over $T$ steps using a fixed variance schedule $\beta_t$.
-$$q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1 - \beta_t} x_{t-1}, \beta_t \mathbf{I})$$
-- We can compute Gaussian noise for specific timestep \(t\).
-$$x_t = \sqrt{\bar{\alpha}_t} \, x_0 + \sqrt{1 - \bar{\alpha}_t} \, \epsilon$$
+
+```math
+q(x_t \mid x_{t-1}) = \mathcal{N}\left(
+x_t;\; \sqrt{1 - \beta_t}\, x_{t-1},\; \beta_t I
+\right)
+```
+
+- We can compute Gaussian noise for specific timestep $t$.
+
+```math
+x_t = \sqrt{\bar{\alpha}_t}\, x_0 + \sqrt{1 - \bar{\alpha}_t}\, \epsilon
+```
+
 - Here, $x_0$ is the original clean image, $\epsilon \sim \mathcal{N}(0, I)$ is Gaussian noise, 
-  and $\bar{\alpha}_t = \prod_{i=1}^t (1 - \beta_i)$ represents the cumulative noise scaling.
+and \(\bar{\alpha}_t = \prod_{i=1}^{t} (1 - \beta_i)\) represents the cumulative noise scaling.
+
 
 
 ### 2. Training: The model learns to predict the noise added at each timestep
@@ -67,15 +78,15 @@ $$x_t = \sqrt{\bar{\alpha}_t} \, x_0 + \sqrt{1 - \bar{\alpha}_t} \, \epsilon$$
 - At each timestep $t$, the model predicts the noise $\epsilon_\theta(x_t, t)$ in the current image  
 - Instead of directly removing the predicted noise, we compute the mean $\mu(x_t, t)$ of the posterior distribution:
 
-$$
+```math
 \mu(x_t, t) = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{\beta_t}{\sqrt{1 - \alpha_{t-1}}} \epsilon_\theta(x_t, t) \right)
-$$
+```
 
 - Gaussian noise with variance $\sigma_t^2$ is added to stabilize sampling:
 
-$$
+```math
 \sigma_t^2 = \frac{1 - \bar{\alpha}_{t-1}}{1 - \bar{\alpha}_t} \, \beta_t
-$$
+```
 
 - This process is repeated for $T$ timesteps (e.g., 1000) until a clean image $x_0$ is generated
 
