@@ -185,7 +185,7 @@ On my computer, I trained a model capable of generating some face images; the re
 This section explains how to train a simple **Denoising Diffusion Probabilistic Model (DDPM)** on your own dataset using the provided code.
 
 ### 1. Download Your Dataset
-- Prepare and download your image dataset. Supported file formats include `.png`, `.jpg`, and `.jpeg`.
+- Prepare and download your image dataset. Supported file formats include `.png`, `.jpg` and `.jpeg`.
 - Smaller variations between images make it easier for the model to predict noise effectively.
 
 ### 2. Setup the Code
