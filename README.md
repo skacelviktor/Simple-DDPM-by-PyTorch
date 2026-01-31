@@ -4,10 +4,6 @@ A clean, minimalist implementation of **DDPM (Denoising Diffusion Probabilistic 
 
 ---
 
-## Overview
-
-This project provides a complete, educational implementation of DDPM - a state-of-the-art generative model that creates new images by learning to reverse a noise addition process.
-
 ## Quickstart
 1. Clone the repo:
 
