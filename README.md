@@ -20,7 +20,7 @@ pip install -r requirements.txt
 
 3. Run the code:
 
-- Open `train.ipynb` or `GenerateImage.ipynb` in Jupyter Notebook or VS Code. 
+- Open `train.ipynb` or `GenerateImage.ipynb`. 
 - Run the cells to train the model or generate images.
 - You can also try the provided pretrained model to generate handwritten digits. The model is located in `Save_model/model_DDPM.pth`.
 
